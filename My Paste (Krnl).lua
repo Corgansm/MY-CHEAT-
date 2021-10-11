@@ -4756,19 +4756,12 @@ others:Element("Dropdown", "leg movement", {options = {"off", "slide"}})
 
 local LagTick = 0 
 local fakelag = rage:Sector("fakelag", "Right") 
-fakelag:Element("Toggle", "enabled", {default = {Toggle = false}}, function(tbl) 
+fakelag:Element("Toggle", "enabled", {default = {Toggle = false}})
 fakelag:Element("Slider", "lag tick", {min = 1, max = 100, default = 8}) 
 fakelag:Element("Dropdown", "amount", {options = {"static", "dynamic"}}) 
 fakelag:Element("Slider", "limit", {min = 1, max = 106, default = 8}) 
-fakelag:Element("ToggleColor", "visualize lag", {default = {Toggle = false, Color = COL3RGB(255,255,255)}}, function(tbl) 
-	if tbl.Toggle then 
-		for _,obj in pairs(FakelagFolder:GetChildren()) do 
-			obj.Color = tbl.Color 
-		end 
-	else 
-		FakelagFolder:ClearAllChildren() 
-	end 
-end) 
+fakelag:Element("ToggleColor", "visualize lag", {default = {Toggle = false, Color = COL3RGB(255,255,255)}})
+
 fakelag:Element("ToggleKeybind", "ping spike") 
 coroutine.wrap(function() 
 	while wait(1/16) do 
@@ -6126,6 +6119,13 @@ RunService.RenderStepped:Connect(function(step)
 				else 
 		FakelagFolder:ClearAllChildren() 
 		game:GetService("NetworkClient"):SetOutgoingKBPSLimit(9e9) 
+	end 
+		                if UserInputService:IsKeyDown("F") and values.Rage.Fakelag["visualize lag"].Toggle then
+			for _,obj in pairs(FakelagFolder:GetChildren()) do 
+			obj.Color = tbl.Color 
+		end 
+	else 
+		FakelagFolder:ClearAllChildren() 
 	end 
 		if values.misc.movement["edge jump"].Toggle and values.misc.movement["edge jump"].Active then 
 			if LocalPlayer.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Freefall and LocalPlayer.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Jumping then 
