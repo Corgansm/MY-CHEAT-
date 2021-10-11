@@ -324,7 +324,7 @@ function library:New(name)
 
 		TabGui.Name = "TabGui" 
 		TabGui.Parent = Tabs 
-		TabGui.BackgroundColor3 = COL3RGB(255, 255, 255) 
+		TabGui.BackgroundColor3 = COL3RGB(230, 230, 230)
 		TabGui.BackgroundTransparency = 1.000 
 		TabGui.Size = UDIM2(1, 0, 1, 0) 
 		TabGui.Visible = false 
@@ -4596,6 +4596,7 @@ local visuals = gui:Tab("visuals")
 local misc = gui:Tab("misc") 
 local skins = gui:Tab("skins") 
 local luas = gui:Tab("Scripts") 
+local Exploits = gui:Tab("Exploits") 
 
 getgenv().api = {} 
 api.newtab = function(name) 
@@ -4610,7 +4611,7 @@ end
 
 
 local luascripts = luas:Sector("lua scripts", "Left") 
-luascripts:Element("Scroll", "lua", {options = allluas, Amount = 5}) 
+luascripts:Element("Scroll", "lua", {options = allluas, Amount = 10}) 
 luascripts:Element("Button", "load", {}, function() 
 	loadstring(readfile("ovalua\\"..values.luas["lua scripts"].lua.Scroll))() 
 end) 
@@ -4756,12 +4757,6 @@ others:Element("Dropdown", "leg movement", {options = {"off", "slide"}})
 local LagTick = 0 
 local fakelag = rage:Sector("fakelag", "Right") 
 fakelag:Element("Toggle", "enabled", {default = {Toggle = false}}, function(tbl) 
-	if tbl.Toggle then 
-	else 
-		FakelagFolder:ClearAllChildren() 
-		game:GetService("NetworkClient"):SetOutgoingKBPSLimit(9e9) 
-	end 
-end) 
 fakelag:Element("Slider", "lag tick", {min = 1, max = 100, default = 8}) 
 fakelag:Element("Dropdown", "amount", {options = {"static", "dynamic"}}) 
 fakelag:Element("Slider", "limit", {min = 1, max = 106, default = 8}) 
@@ -4811,10 +4806,9 @@ coroutine.wrap(function()
 	end 
 end)() 
 
-local exploits = rage:Sector("exploits", "Left")
+local exploits = Exploits:Sector("exploits", "Left")
 exploits:Element("Jumbobox", "quick peak type", {options = {"freeze", "tween", "teleport"}})
-exploits:Element("ToggleKeybind", "triple tap")      
-exploits:Element("ToggleKeybind", "kill all")     
+exploits:Element("ToggleKeybind", "triple tap")       
 exploits:Element("Slider", "quick peek vertical pos", {min = -500, max = 500, default = 200})  
 exploits:Element("ToggleKeybind", "quick peek",{},function(tbl)
 	if tbl.Toggle and tbl.Active and LocalPlayer.Character and Peek == false then
@@ -6128,6 +6122,11 @@ RunService.RenderStepped:Connect(function(step)
 				end 
 			end 
 		end 
+			if UserInputService:IsKeyDown("F") and values.Rage.Fakelag["enabled"].Toggle then
+				else 
+		FakelagFolder:ClearAllChildren() 
+		game:GetService("NetworkClient"):SetOutgoingKBPSLimit(9e9) 
+	end 
 		if values.misc.movement["edge jump"].Toggle and values.misc.movement["edge jump"].Active then 
 			if LocalPlayer.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Freefall and LocalPlayer.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Jumping then 
 				coroutine.wrap(function() 
