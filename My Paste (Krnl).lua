@@ -1,7 +1,7 @@
 getgenv().values = {}
 
 local library = loadstring(game:HttpGet'https://raw.githubusercontent.com/CatzCode/PikaHub/main/Libraries/UI/bruh.lua')()
-library:CreateWatermark("deoware ! ver.1.0 ! :) ")
+library:CreateWatermark("CHANGE ME!!!")
 library.theme.accentcolor = Color3.fromRGB(233, 236, 73)
 library.theme.accentcolor2 = Color3.fromRGB(221, 255, 0)
 library.theme.topheight = 42
@@ -19,8 +19,8 @@ local ConfigLoad = Signal.new("ConfigLoad")
 local txt = game:GetService("TextService") 
 local TweenService = game:GetService("TweenService") 
 function library:Tween(...) TweenService:Create(...):Play() end 
-local cfglocation = "deocfg/" 
-makefolder("deocfg") 
+local cfglocation = "ovacfg/" 
+makefolder("ovacfg") 
 
 
 -- caching 
@@ -4578,7 +4578,7 @@ for i,v in ipairs(AllWeapons) do
 	end 
 end 
 
-makefolder("deolua") 
+makefolder("ovalua") 
 
 local allluas = {} 
 
@@ -4589,13 +4589,13 @@ end
 
 RunService.RenderStepped:Wait() 
 
-local gui = library:New("Dump!") 
+local gui = library:New("CHANGE ME") 
 local legit = gui:Tab("legit") 
 local rage = gui:Tab("rage") 
 local visuals = gui:Tab("visuals") 
 local misc = gui:Tab("misc") 
 local skins = gui:Tab("skins") 
-local luas = gui:Tab("luas") 
+local luas = gui:Tab("Scripts") 
 
 getgenv().api = {} 
 api.newtab = function(name) 
@@ -5499,7 +5499,7 @@ Items.ZIndexBehavior = "Global"
 do 
 	function add(plr) 
 		local ImageLabel = INST("ImageLabel") 
-		ImageLabel.BackgroundColor3 = COL3RGB(255, 255, 255) 
+		ImageLabel.BackgroundColor3 = COL3RGB(230, 230, 230)
 		ImageLabel.BackgroundTransparency = 1.000 
 		ImageLabel.Size = UDIM2(0, 62, 0, 25) 
 		ImageLabel.Visible = false 
