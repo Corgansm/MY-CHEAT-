@@ -1,20 +1,18 @@
 getgenv().values = {}
-
 local library = loadstring(game:HttpGet'https://raw.githubusercontent.com/CatzCode/PikaHub/main/Libraries/UI/bruh.lua')()
-library:CreateWatermark("CHANGE ME!!!")
+library:CreateWatermark("Test")
 library.theme.accentcolor = Color3.fromRGB(233, 236, 73)
 library.theme.accentcolor2 = Color3.fromRGB(221, 255, 0)
 library.theme.topheight = 42
 library.theme.TextColor = Color3.fromRGB(211, 195, 152)
 
+
+getgenv().values = {}
 local library = {}
 local Signal = loadstring(game:HttpGet("https://pastebin.com/raw/jexi9n1h"))()
 --local Api = loadstring(game:HttpGet("https://pastebin.com/raw/YgxABfPV"))()
 local ConfigSave = Signal.new("ConfigSave")
 local ConfigLoad = Signal.new("ConfigLoad")
-local ConfigSave = Signal.new("ConfigSave") 
-local ConfigLoad = Signal.new("ConfigLoad") 
-
 
 local txt = game:GetService("TextService") 
 local TweenService = game:GetService("TweenService") 
@@ -324,7 +322,7 @@ function library:New(name)
 
 		TabGui.Name = "TabGui" 
 		TabGui.Parent = Tabs 
-		TabGui.BackgroundColor3 = COL3RGB(230, 230, 230)
+		TabGui.BackgroundColor3 = COL3RGB(255, 255, 255) 
 		TabGui.BackgroundTransparency = 1.000 
 		TabGui.Size = UDIM2(1, 0, 1, 0) 
 		TabGui.Visible = false 
@@ -4699,6 +4697,7 @@ aimbot:Element("Jumbobox", "resolver", {options = {"pitch", "roll"}})
 aimbot:Element("Toggle", "delay shot") 
 aimbot:Element("Toggle", "force hit")
 aimbot:Element("Toggle", "sex package") 
+aimbot:Element("Dropdown", "prediction", {options = {"off", "cframe", "velocity"}})
 aimbot:Element("Toggle", "teammates") 
 aimbot:Element("Toggle", "auto baim") 
 aimbot:Element("Toggle", "knifebot") 
@@ -4757,9 +4756,8 @@ others:Element("Dropdown", "leg movement", {options = {"off", "slide"}})
 local LagTick = 0 
 local fakelag = rage:Sector("fakelag", "Right") 
 fakelag:Element("Toggle", "enabled", {default = {Toggle = false}})
-fakelag:Element("Slider", "lag tick", {min = 1, max = 100, default = 8}) 
 fakelag:Element("Dropdown", "amount", {options = {"static", "dynamic"}}) 
-fakelag:Element("Slider", "limit", {min = 1, max = 106, default = 8}) 
+fakelag:Element("Slider", "limit", {min = 1, max = 1000, default = 8}) 
 fakelag:Element("ToggleColor", "visualize lag", {default = {Toggle = false, Color = COL3RGB(255,255,255)}})
 
 fakelag:Element("ToggleKeybind", "ping spike") 
@@ -6497,7 +6495,27 @@ mt.__namecall = function(self, ...)
 				end 
 			end)() 
 		end 
-		 
+		 	if values.rage.aimbot["prediction"].Dropdown ~= "off" and RageTarget ~= nil then
+			coroutine.wrap(function()
+				if Players:GetPlayerFromCharacter(args[1].Parent) or args[1] == RageTarget then
+					if values.rage.aimbot["prediction"].Dropdown == "cframe" then
+						local Velocity = (RageTarget.Parent.HumanoidRootPart.Position - RageTarget.Parent.HumanoidRootPart.OldPosition.Value)/LastStep
+						local Direction = Vector3.new(Velocity.X/Velocity.magnitude, 0, Velocity.Z/Velocity.magnitude)
+						args[2] = args[2] + Direction * ((Velocity.magnitude*(Ping/1000)))
+						args[4] = 0
+						args[12] = args[12] - 500
+					else
+						local Velocity = RageTarget.Parent.HumanoidRootPart.Velocity
+						local Direction = Vector3.new(Velocity.X/Velocity.magnitude, 0, Velocity.Z/Velocity.magnitude)
+						if Velocity.magnitude >= 8 then
+							args[2] = args[2] + Direction * (Velocity.magnitude*(Ping/1000) * (Ping > 200 and 1.5 or 2))
+							args[4] = 0
+							args[12] = args[12] - 500
+						end
+					end
+				end
+			end)()
+		end
 		if values.visuals.world["bullet tracers"].Toggle then 
 			coroutine.wrap(function() 
 				local beam = INST("Part") 
