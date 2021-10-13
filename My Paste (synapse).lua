@@ -4811,21 +4811,25 @@ exploits:Element("ToggleKeybind", "quick peek",{},function(tbl)
 		Peek = false
 	end
 end)  
-exploits:Element("ToggleKeybind", "quick peek horizontal",{},function(tbl)
-	if tbl.Toggle and tbl.Active and LocalPlayer.Character and Peek == false then
-		--LocalPlayer.Additionals.TotalDamage:GetPropertyChangedSignal("Value"):Connect(function(current) 
-	--if current == 0 then return end
-		Peek = true
-		local a = game.Players.localPlayer.Character.HumanoidRootPart.CFrame
-		setclipboard(tostring(a))
-		wait(0.5)
-		peek = false
-		CFrame.new = a.CFrame
-		end
-	elseif  not tbl.Active then
-		Peek = false
-	end
-end)  
+exploits:Element("ToggleKeybind","quick peek horizontal",{},function(tbl)
+        if tbl.Toggle and tbl.Active and LocalPlayer.Character and Peek == false then
+            --LocalPlayer.Additionals.TotalDamage:GetPropertyChangedSignal("Value"):Connect(function(current)
+            --if current == 0 then return end
+            Peek = true
+            function teleport(pos, t)
+                --local a = game.Players.localPlayer.Character.HumanoidRootPart.CFrame
+                local player = game.Players.LocalPlayer
+                local a = player.Character:GetPrimaryPartCFrame() -- old frame
+                wait(0.5)
+                peek = false
+                player.Character:SerPrimaryPartCFrame(a) -- teleports to old frame after .5 secs
+            end
+        elseif not tbl.Active then
+            Peek = false
+        end
+    end
+)
+
 				
 		
 		
