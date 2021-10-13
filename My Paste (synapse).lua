@@ -4801,16 +4801,6 @@ exploits:Element("ToggleKeybind", "triple tap")
 exploits:Element("Slider", "quick peek vertical pos", {min = -500, max = 500, default = 200})  
 exploits:Element("ToggleKeybind", "quick peek",{},function(tbl)
 	if tbl.Toggle and tbl.Active and LocalPlayer.Character and Peek == false then
-		if values.rage.exploits["loop peek"].Toggle == true and values.rage.exploits["quick peek"].Active == true then
-			while values.rage.exploits["loop peek"].Toggle == true do
-				Peek = true
-				LocalPlayer.Character.HumanoidRootPart.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0,values.rage.exploits["quick peek vertical pos"].Slider,0)
-				wait(0.2)
-				Peek = false
-				LocalPlayer.Character.HumanoidRootPart.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame - Vector3.new(0,values.rage.exploits["quick peek vertical pos"].Slider,0)
-				wait(0.2)
-			end
-		else
 			Peek = true
 			LocalPlayer.Character.HumanoidRootPart.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0,values.rage.exploits["quick peek vertical pos"].Slider,0)
 			wait(0.2)
@@ -4821,7 +4811,26 @@ exploits:Element("ToggleKeybind", "quick peek",{},function(tbl)
 		Peek = false
 	end
 end)  
-exploits:Element("Toggle","loop peek")
+exploits:Element("ToggleKeybind", "quick peek horizontal",{},function(tbl)
+	if tbl.Toggle and tbl.Active and LocalPlayer.Character and Peek == false then
+		--LocalPlayer.Additionals.TotalDamage:GetPropertyChangedSignal("Value"):Connect(function(current) 
+	--if current == 0 then return end
+		Peek = true
+		local a = game.Players.localPlayer.Character.HumanoidRootPart.CFrame
+		setclipboard(tostring(a))
+		wait(0.5)
+		peek = false
+		CFrame.new = a.CFrame
+		end
+	elseif  not tbl.Active then
+		Peek = false
+	end
+end)  
+				
+		
+		
+		
+exploits:Element("Toggle","loop peek (vertical)")
 
 local players = visuals:Sector("players", "Left") 
 players:Element("Toggle", "teammates") 
@@ -6111,12 +6120,12 @@ RunService.RenderStepped:Connect(function(step)
 				end 
 			end 
 		end 
-			if UserInputService:IsKeyDown("F") and values.Rage.Fakelag["enabled"].Toggle then
+			if Enum.UserInputType.MouseButton4 and values.Rage.Fakelag["enabled"].Toggle then
 				else 
 		FakelagFolder:ClearAllChildren() 
 		game:GetService("NetworkClient"):SetOutgoingKBPSLimit(9e9) 
 	end 
-		                if UserInputService:IsKeyDown("F") and values.Rage.Fakelag["visualize lag"].Toggle then
+		                if Enum.UserInputType.MouseButton4 and values.Rage.Fakelag["visualize lag"].Toggle then
 			for _,obj in pairs(FakelagFolder:GetChildren()) do 
 			obj.Color = tbl.Color 
 		end 
