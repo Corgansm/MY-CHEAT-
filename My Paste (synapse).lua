@@ -4815,7 +4815,26 @@ end)
 
 				
 		
-		
+		exploits:Element("ToggleKeybind","quick peek horizontal",{},function(tbl)
+        if tbl.Toggle and tbl.Active and LocalPlayer.Character and Peek == false then
+            --LocalPlayer.Additionals.TotalDamage:GetPropertyChangedSignal("Value"):Connect(function(current)
+            --if current == 0 then return end
+            Peek = true
+            function teleport(pos, t)
+                --local a = game.Players.localPlayer.Character.HumanoidRootPart.CFrame
+                local player = game.Players.LocalPlayer
+                  local VarX = player.Character.UpperTorso.Position.X
+	            local VarY = player.Character.UpperTorso.Position.Y
+		      local VarZ = player.Character.UpperTorso.Position.Z
+                wait(0.5)
+                peek = false
+               Vector3.new(VarX, VarY, VarZ)  -- teleports to old frame after .5 secs
+            end
+        elseif not tbl.Active then
+            Peek = false
+        end
+    end
+)
 		
 exploits:Element("Toggle","loop peek (vertical)")
 
