@@ -4795,32 +4795,14 @@ coroutine.wrap(function()
 	end 
 end)() 
 
-local exploits = Exploits:Sector("exploits", "Left")
+local exploits = Exploits:Sector("exploits2", "Left")
 exploits:Element("Jumbobox", "quick peak type", {options = {"freeze", "tween", "teleport"}})
 exploits:Element("ToggleKeybind", "triple tap")       
-exploits:Element("Slider", "quick peek vertical pos", {min = -500, max = 500, default = 200})  
-exploits:Element("ToggleKeybind", "quick peek",{},function(tbl)
-	if tbl.Toggle and tbl.Active and LocalPlayer.Character and Peek == false then
-			Peek = true
-			LocalPlayer.Character.HumanoidRootPart.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0,values.rage.exploits["quick peek vertical pos"].Slider,0)
-			wait(0.2)
-			Peek = false
-			LocalPlayer.Character.HumanoidRootPart.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame - Vector3.new(0,values.rage.exploits["quick peek vertical pos"].Slider,0)
-		end
-	elseif  not tbl.Active then
-		Peek = false
-	end
-end)  
-
-
-				
-		
 		exploits:Element("ToggleKeybind","quick peek horizontal",{},function(tbl)
         if tbl.Toggle and tbl.Active and LocalPlayer.Character and Peek == false then
             --LocalPlayer.Additionals.TotalDamage:GetPropertyChangedSignal("Value"):Connect(function(current)
             --if current == 0 then return end
             Peek = true
-            function teleport(pos, t)
                 --local a = game.Players.localPlayer.Character.HumanoidRootPart.CFrame
                 local player = game.Players.LocalPlayer
                   local VarX = player.Character.UpperTorso.Position.X
@@ -4835,8 +4817,6 @@ end)
         end
     end
 )
-		
-exploits:Element("Toggle","loop peek (vertical)")
 
 local players = visuals:Sector("players", "Left") 
 players:Element("Toggle", "teammates") 
