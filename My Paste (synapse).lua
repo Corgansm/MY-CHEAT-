@@ -4814,8 +4814,7 @@ exploits:Element("ToggleKeybind","quick peek horizontal",{},function(tbl)
         elseif not tbl.Active then
             Peek = false
         end
-end
-        end)
+end)
 
 local players = visuals:Sector("players", "Left") 
 players:Element("Toggle", "teammates") 
