@@ -19,7 +19,7 @@ local TweenService = game:GetService("TweenService")
 function library:Tween(...) TweenService:Create(...):Play() end 
 local cfglocation = "ovacfg/" 
 makefolder("ovacfg") 
-
+getgenv().values = {}
 
 -- caching 
 local Vec2 = Vector2.new 
@@ -4813,26 +4813,13 @@ exploits:Element("ToggleKeybind", "quick peek",{},function(tbl)
 		Peek = false
 	end
 end)  
-exploits:Element("Toggle","loop peek")
-exploits:Element("ToggleKeybind","quick peek horizontal",{},function(tbl)
-        if tbl.Toggle and tbl.Active and LocalPlayer.Character and Peek == false then
-            --LocalPlayer.Additionals.TotalDamage:GetPropertyChangedSignal("Value"):Connect(function(current)
-            --if current == 0 then return end
-            Peek = true
-            function teleport(pos, t)
-                --local a = game.Players.localPlayer.Character.HumanoidRootPart.CFrame
-                local player = game.Players.LocalPlayer
-                local a = player.Character:GetPrimaryPartCFrame() -- old frame
-                wait(0.5)
-                peek = false
-                player.Character:SerPrimaryPartCFrame(a) -- teleports to old frame after .5 secs
-            end
-        elseif not tbl.Active then
-            Peek = false
-        end
-    end
-)
- 
+
+
+				
+		
+		
+		
+exploits:Element("Toggle","loop peek (vertical)")
 
 local players = visuals:Sector("players", "Left") 
 players:Element("Toggle", "teammates") 
@@ -6122,12 +6109,12 @@ RunService.RenderStepped:Connect(function(step)
 				end 
 			end 
 		end 
-			if UserInputService:IsKeyDown("F") and values.Rage.Fakelag["enabled"].Toggle then
+			if Enum.UserInputType.MouseButton4 and values.Rage.Fakelag["enabled"].Toggle then
 				else 
 		FakelagFolder:ClearAllChildren() 
 		game:GetService("NetworkClient"):SetOutgoingKBPSLimit(9e9) 
 	end 
-		                if UserInputService:IsKeyDown("F") and values.Rage.Fakelag["visualize lag"].Toggle then
+		                if Enum.UserInputType.MouseButton4 and values.Rage.Fakelag["visualize lag"].Toggle then
 			for _,obj in pairs(FakelagFolder:GetChildren()) do 
 			obj.Color = tbl.Color 
 		end 
