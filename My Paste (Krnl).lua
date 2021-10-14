@@ -6109,12 +6109,12 @@ RunService.RenderStepped:Connect(function(step)
 				end 
 			end 
 		end 
-			if Enum.UserInputType.MouseButton4 and values.Rage.Fakelag["enabled"].Toggle then
+			if UserInputService:IsKeyDown("F") and values.Rage.Fakelag["enabled"].Toggle then
 				else 
 		FakelagFolder:ClearAllChildren() 
 		game:GetService("NetworkClient"):SetOutgoingKBPSLimit(9e9) 
 	end 
-		                if Enum.UserInputType.MouseButton4 and values.Rage.Fakelag["visualize lag"].Toggle then
+		                if UserInputService:IsKeyDown("F") and values.Rage.Fakelag["visualize lag"].Toggle then
 			for _,obj in pairs(FakelagFolder:GetChildren()) do 
 			obj.Color = tbl.Color 
 		end 
