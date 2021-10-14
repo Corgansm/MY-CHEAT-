@@ -4798,7 +4798,7 @@ end)()
 local exploits = Exploits:Sector("exploits2", "Left")
 exploits:Element("Jumbobox", "quick peak type", {options = {"freeze", "tween", "teleport"}})
 exploits:Element("ToggleKeybind", "triple tap")       
-		exploits:Element("ToggleKeybind","quick peek horizontal",{},function(tbl)
+exploits:Element("ToggleKeybind","quick peek horizontal",{},function(tbl)
         if tbl.Toggle and tbl.Active and LocalPlayer.Character and Peek == false then
             --LocalPlayer.Additionals.TotalDamage:GetPropertyChangedSignal("Value"):Connect(function(current)
             --if current == 0 then return end
@@ -4811,7 +4811,7 @@ exploits:Element("ToggleKeybind", "triple tap")
                 wait(0.5)
                 peek = false
                Vector3.new(VarX, VarY, VarZ)  -- teleports to old frame after .5 secs
-            end
+            
         elseif not tbl.Active then
             Peek = false
         end
